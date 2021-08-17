@@ -1,4 +1,4 @@
-## KPHPUnit
+# KPHPUnit
 
 [KPHP](https://github.com/VKCOM/kphp/) polyfill-like package for the [PHPUnit](https://phpunit.de/).
 
