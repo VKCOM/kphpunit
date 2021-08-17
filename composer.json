@@ -1,0 +1,20 @@
+{
+    "name": "vkcom/kphpunit",
+    "description": "KPHP polyfill-like package for the PHPUnit",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Iskander Sharipov",
+            "email": "quasilyte@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "KPHPUnit\\": "src/"
+        }
+    }
+}
