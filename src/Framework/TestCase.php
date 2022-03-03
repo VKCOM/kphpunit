@@ -16,7 +16,7 @@ class TestCase {
      * @param string $message
      */
     public function assertTrue($condition, string $message = '') {
-        TestCase::assertTrueWithLine($condition, $message);
+        throw new \Exception('this stub should have been replaced');
     }
 
     /**
@@ -24,11 +24,11 @@ class TestCase {
      * @param mixed $condition
      * @param string $message
      */
-    public function assertTrueWithLine(int $line, $condition, string $message = '') {
+    public function _assertTrueWithLine(int $line, $condition, string $message = '') {
         if ($condition === true) {
             TestCase::ok();
         } else {
-            TestCase::fail('BOOL', 'true', $condition, $message, $line);
+            TestCase::assertFail('BOOL', 'true', $condition, $message, $line);
         }
     }
 
@@ -37,7 +37,7 @@ class TestCase {
      * @param string $message
      */
     public function assertFalse($condition, string $message = '') {
-        TestCase::assertFalseWithLine(0, $condition, $message);
+        throw new \Exception('this stub should have been replaced');
     }
 
     /**
@@ -45,11 +45,11 @@ class TestCase {
      * @param mixed $condition
      * @param string $message
      */
-    public function assertFalseWithLine(int $line, $condition, string $message = '') {
+    public function _assertFalseWithLine(int $line, $condition, string $message = '') {
         if ($condition === false) {
             TestCase::ok();
         } else {
-            TestCase::fail('BOOL', 'false', $condition, $message, $line);
+            TestCase::assertFail('BOOL', 'false', $condition, $message, $line);
         }
     }
 
@@ -59,7 +59,7 @@ class TestCase {
      * @param string $message
      */
     public function assertSame($expected, $actual, string $message = '') {
-        TestCase::assertSameWithLine(0, $expected, $actual, $message);
+        throw new \Exception('this stub should have been replaced');
     }
 
     /**
@@ -68,11 +68,11 @@ class TestCase {
      * @param mixed $actual
      * @param string $message
      */
-    public function assertSameWithLine(int $line, $expected, $actual, string $message = '') {
+    public function _assertSameWithLine(int $line, $expected, $actual, string $message = '') {
         if (TestCase::checkIdentical($expected, $actual)) {
             TestCase::ok();
         } else {
-            TestCase::fail('SAME', $expected, $actual, $message, $line);
+            TestCase::assertFail('SAME', $expected, $actual, $message, $line);
         }
     }
 
@@ -82,7 +82,7 @@ class TestCase {
      * @param string $message
      */
     public function assertNotSame($expected, $actual, string $message = '') {
-        TestCase::assertNotSameWithLine(0, $expected, $actual, $message);
+        throw new \Exception('this stub should have been replaced');
     }
 
     /**
@@ -91,11 +91,11 @@ class TestCase {
      * @param mixed $actual
      * @param string $message
      */
-    public function assertNotSameWithLine(int $line, $expected, $actual, string $message = '') {
+    public function _assertNotSameWithLine(int $line, $expected, $actual, string $message = '') {
         if (!TestCase::checkIdentical($expected, $actual)) {
             TestCase::ok();
         } else {
-            TestCase::fail('NOT_SAME', $expected, $actual, $message, $line);
+            TestCase::assertFail('NOT_SAME', $expected, $actual, $message, $line);
         }
     }
 
@@ -105,7 +105,7 @@ class TestCase {
      * @param string $message
      */
     public function assertEquals($expected, $actual, string $message = '') {
-        TestCase::assertEqualsWithLine(0, $expected, $actual, $message);
+        throw new \Exception('this stub should have been replaced');
     }
 
     /**
@@ -114,11 +114,11 @@ class TestCase {
      * @param mixed $actual
      * @param string $message
      */
-    public function assertEqualsWithLine(int $line, $expected, $actual, string $message = '') {
+    public function _assertEqualsWithLine(int $line, $expected, $actual, string $message = '') {
         if (TestCase::checkEquals($expected, $actual)) {
             TestCase::ok();
         } else {
-            TestCase::fail('EQUALS', $expected, $actual, $message, $line);
+            TestCase::assertFail('EQUALS', $expected, $actual, $message, $line);
         }
     }
 
@@ -128,7 +128,7 @@ class TestCase {
      * @param string $message
      */
     public function assertNotEquals($expected, $actual, string $message = '') {
-        TestCase::assertNotEqualsWithLine(0, $expected, $actual, $message);
+        throw new \Exception('this stub should have been replaced');
     }
 
     /**
@@ -137,12 +137,24 @@ class TestCase {
      * @param mixed $actual
      * @param string $message
      */
-    public function assertNotEqualsWithLine(int $line, $expected, $actual, string $message = '') {
+    public function _assertNotEqualsWithLine(int $line, $expected, $actual, string $message = '') {
         if (!TestCase::checkEquals($expected, $actual)) {
             TestCase::ok();
         } else {
-            TestCase::fail('NOT_EQUALS', $expected, $actual, $message, $line);
+            TestCase::assertFail('NOT_EQUALS', $expected, $actual, $message, $line);
         }
+    }
+
+    /**
+     * @param string $message
+     */
+    public function fail(string $message = '') {
+        throw new \Exception('this stub should have been replaced');
+    }
+
+    public function _failWithLine(int $line, string $message = '') {
+        echo json_encode(["FAIL", $message, $line]) . "\n";
+        throw new AssertionFailedException();
     }
 
     private static function compareAsEqualStrings($expected, $actual): bool {
@@ -231,7 +243,7 @@ class TestCase {
      * @param string $message
      * @param int $line
      */
-    private static function fail(string $kind, $expected, $actual, string $message, int $line) {
+    private static function assertFail(string $kind, $expected, $actual, string $message, int $line) {
         echo json_encode(["ASSERT_{$kind}_FAILED", $expected, $actual, $message, $line]) . "\n";
         throw new AssertionFailedException();
     }
